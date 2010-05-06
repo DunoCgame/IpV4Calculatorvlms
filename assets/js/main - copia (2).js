@@ -1,7 +1,4 @@
 
-
-/*----------------------Aumentar y disminuir la cntidad de host-----------------------------*/
-
 function Max(){
 
 	let num = document.getElementById("number_Host").value
@@ -46,7 +43,6 @@ function Min(){
 
 }
 
-/*---------Obtener datos de Fecha y hora------------*/
 function obtenerFechaActual() {
 	  const fecha = new Date();
 	  const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -60,26 +56,25 @@ function obtenerHoraActual() {
 }
 
 
-/*-------------------------------------------------------------------------*/
 
+let ContainnerResult = document.getElementById("results")
 
+function CalculateRedIpv4(){
 
-function Manejo_de_data(){
-const Bit_Maximo_IP=32;
-const Val_max_Mask = 256;
-let resultadosSubredes = [];
-let IP = document.getElementById("Add_ip").value;
-let Prefijo_original = document.getElementById("Prefijo_original").value;
-let ContainnerElementosInputHost = document.querySelectorAll("#inputNumberHost").length;
-/*----------------------------------------------------------*/
-if(ContainnerElementosInputHost==0){
+	const Bit_Maximo_IP=32;
+	const Val_max_Mask = 256;
+
+	let IP = document.getElementById("Add_ip").value;
+	let Prefijo_original = document.getElementById("Prefijo_original").value;
+	let ContainnerElementosInputHost = document.querySelectorAll("#inputNumberHost").length;
+
+	if(ContainnerElementosInputHost==0){
 			
-		return `<p class="Error-message">Error: No se han especificado requisitos de hosts. Añade al menos un departamento.</p>`
+		alert("Error: No se han especificado requisitos de hosts. Añade al menos un departamento.")
 	
 	}
 	else{
-
-		if(IP!="" && Prefijo_original!=""){
+			if(IP!="" && Prefijo_original!=""){
 				
 				let resultadosSubredes = [];
 				/*--------calculo de ip-----------------*/
@@ -87,52 +82,52 @@ if(ContainnerElementosInputHost==0){
 
 				/*----------Validaciones---------------------*/
 				if (ipParts.length !== 4 || ipParts.some(part => isNaN(part) || part < 0 || part > 255)) {
-	              	 
-	              	 return `<p class="Error-message">Error: Dirección IP de red principal inválida. Asegúrate de que tenga 4 octetos numéricos (0-255).</p>`;
+	              	 ContainnerResult.innerHTML= '';
+	              	 ContainnerResult.innerHTML= `<p style="color:red; font-size:20px">Error: Dirección IP de red principal inválida. Asegúrate de que tenga 4 octetos numéricos (0-255).</p>`;
 	            }
 	            if (isNaN(Prefijo_original) || Prefijo_original < 1 || Prefijo_original > 31) {
-	               	
-	               	return`<p class="Error-message">Error: Prefijo CIDR original inválido. Debe ser un número entre 1 y 31.</p>`;
+	               	ContainnerResult.innerHTML= '';
+	               	ContainnerResult.innerHTML= `<p style="color:red; font-size:20px">Error: Prefijo CIDR original inválido. Debe ser un número entre 1 y 31.</p>`;
 	            }
 
 	  
 
 	            /*------------------------------------------------------------*/
-		        //Convertir la IP principal de la red base a un número entero
-	            let currentIPDecimal = (ipParts[0] << 24) | (ipParts[1] << 16) | (ipParts[2] << 8) | ipParts[3];
+				        //Convertir la IP principal de la red base a un número entero
+			            let currentIPDecimal = (ipParts[0] << 24) | (ipParts[1] << 16) | (ipParts[2] << 8) | ipParts[3];
 
-	            //La dirección de broadcast de la red principal nos da su límite superior
-	            const originalNetworkSize = Math.pow(2, (Bit_Maximo_IP - Prefijo_original));
-	            const originalNetworkBroadcastDecimal = (currentIPDecimal + originalNetworkSize - 1);
-				/*--------calculo de ip-----------------*/
+			            //La dirección de broadcast de la red principal nos da su límite superior
+			            const originalNetworkSize = Math.pow(2, (Bit_Maximo_IP - Prefijo_original));
+			            const originalNetworkBroadcastDecimal = (currentIPDecimal + originalNetworkSize - 1);
+						/*--------calculo de ip-----------------*/
 
-				/*##################################################################################*/
+						/*##################################################################################*/
 
 						/*----------Calculo de Host--------------*/
 				let AlmacenHost =[];
 				let Host_requeridos = document.querySelectorAll("#inputNumberHost");
 					Host_requeridos.forEach((element, index)=>{
 							if(element.value==""){
-								
-	                  			return`<p class="Error-message" >Error: El valor host no puede estar vacío.</p>`;
+								ContainnerResult.innerHTML= '';
+	                  			ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: El valor host no puede estar vacío.</p>`;
 							}	
 						});
 				let Name_Host_requeridos = document.querySelectorAll("#inputNameNumberHost");
 						Name_Host_requeridos.forEach((element, index)=>{
 							if(element.value==""){
-							
-	                  			return`<p class="Error-message">Error: El nombre del requisito de host no puede estar vacío.</p>`;
+								ContainnerResult.innerHTML= '';
+	                  			ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: El nombre del requisito de host no puede estar vacío.</p>`;
 							}	
 						});
 
-				for(let i=0;i<ContainnerElementosInputHost; i++ ){
+			for(let i=0;i<ContainnerElementosInputHost; i++ ){
 
-					AlmacenHost.push({name:Name_Host_requeridos[i].value,host:Host_requeridos[i].value})
+				AlmacenHost.push({name:Name_Host_requeridos[i].value,host:Host_requeridos[i].value})
 
-				}
+			}
 
-				const sortedRequisitosHosts = AlmacenHost.slice().sort((a, b) => b.hosts - a.hosts);
-				
+			const sortedRequisitosHosts = AlmacenHost.slice().sort((a, b) => b.hosts - a.hosts);
+			
 			/*--------------------------------------*/
 
 			for (const req of sortedRequisitosHosts){
@@ -148,8 +143,8 @@ if(ContainnerElementosInputHost==0){
 
 							if (bitsHostNecesarios >= Bit_Maximo_IP) {
 	                           
-								
-	                            return`<p class="Error-message">Error interno: Demasiados hosts solicitados para "${hostsNecesarios}". No caben en una IPv4.</p>`;
+								ContainnerResult.innerHTML=``;
+	                            ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error interno: Demasiados hosts solicitados para "${hostsNecesarios}". No caben en una IPv4.</p>`;
 	                        }
 						}
 
@@ -157,7 +152,8 @@ if(ContainnerElementosInputHost==0){
 
 						if (nuevaMascaraCIDR < Prefijo_original) {
 				
-					  		   return`<p class="Error-message">Error: La subred "${nombreSubred}" con ${hostsNecesarios} hosts requiere un prefijo /${nuevaMascaraCIDR}, que es más grande que la red principal /${Prefijo_original}. No es posible subnetear de esta forma.</p>`;
+					     	ContainnerResult.innerHTML= ``;
+					            ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: La subred "${nombreSubred}" con ${hostsNecesarios} hosts requiere un prefijo /${nuevaMascaraCIDR}, que es más grande que la red principal /${Prefijo_original}. No es posible subnetear de esta forma.</p>`;
 					     
 					     }
 
@@ -168,8 +164,8 @@ if(ContainnerElementosInputHost==0){
                			 /*----------------------------------------*/
                			 // Verificamos si la dirección de broadcast de la subred propuesta excede el broadcast de la red principal
 		                if (currentIPDecimal + totalDireccionesSubred -1 > originalNetworkBroadcastDecimal) {
-		                	
-		                    return`<p class="Error-message">Error: Las subredes requeridas exceden el tamaño de la red principal ${IP}/${Prefijo_original}. La subred "${nombreSubred}" no tiene espacio disponible.</p>`;
+		                	ContainnerResult.innerHTML= ``;
+		                    ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: Las subredes requeridas exceden el tamaño de la red principal ${IP}/${Prefijo_original}. La subred "${nombreSubred}" no tiene espacio disponible.</p>`;
 		                }
 
                 	 // Convertir la IP de red actual de decimal a formato punteado
@@ -239,102 +235,76 @@ if(ContainnerElementosInputHost==0){
 
 			}
 
-			return resultadosSubredes;
-		
 
-		}
+			/**cierre for**/
 
+			console.log(resultadosSubredes)
+			// Clear previous content
+ContainnerResult.innerHTML = '';
 
-	}/*cierre else*/
-
-
-
-}
-
-
-function CalculateRedIpv4(){
-
-let ContainnerResult = document.getElementById("results")
-
-
- let Result = Manejo_de_data()
-
-
-	if(typeof Result=="object"){
-		ContainnerResult.innerHTML='';
-		PrintDataResult(Result)
-
-	}
-	else{
-		ContainnerResult.innerHTML=Result;
-	}
-
-
-}
-
-/*------------------------------------------------------------------*/
-
-function PrintDataResult(resultadosSubredes){
-
-let IP = document.getElementById("Add_ip").value;
-let Prefijo_original = document.getElementById("Prefijo_original").value;
-let ContainnerResult = document.getElementById("results")
-
-	// Create header
+// Create header
 const header = document.createElement('header');
-	header.className = 'encabesado-resultado';
-	header.innerHTML = `
-	    <section class="sub-Encabesado1">
-	        <label class="labelfecha">Fecha: <span>${obtenerFechaActual()}</span></label>
-	        <label class="labelHora">Hora:<span>${obtenerHoraActual()}</span></label>
-	    </section>
-	    <section class="sub-Encabesado2">
-	        <h2 style="margin-left:11px">IP de Red Principal:</h2><h3>${IP}/${Prefijo_original}</h3>
-	    </section>`;
-	ContainnerResult.appendChild(header);
+header.className = 'encabesado-resultado';
+header.innerHTML = `
+    <section class="sub-Encabesado1">
+        <label class="labelfecha">Fecha: <span>${obtenerFechaActual()}</span></label>
+        <label class="labelHora">Hora:<span>${obtenerHoraActual()}</span></label>
+    </section>
+    <section class="sub-Encabesado2">
+        <h2 style="margin-left:11px">IP de Red Principal:</h2><h3>${IP}/${Prefijo_original}</h3>
+    </section>`;
+ContainnerResult.appendChild(header);
 
 // Create table
 const table = document.createElement('table');
-	  table.style="margin-left:11.5px";
+table.style="margin-left:11.5px";
+const thead = document.createElement('thead');
+thead.innerHTML = `
+    <tr>
+        <th>No.</th>
+        <th>Nombre</th>
+        <th>Hosts Req.</th>
+        <th>Hosts Util.</th>
+        <th>CIDR</th>
+        <th>Máscara</th>
+        <th>IP de Red</th>
+        <th>Rango IPs Util.</th>
+        <th>Broadcast</th>
+    </tr>`;
+table.appendChild(thead);
 
-	const thead = document.createElement('thead');
-			thead.innerHTML = `
-			    <tr>
-			        <th>No.</th>
-			        <th>Nombre</th>
-			        <th>Hosts Req.</th>
-			        <th>Hosts Util.</th>
-			        <th>CIDR</th>
-			        <th>Máscara</th>
-			        <th>IP de Red</th>
-			        <th>Rango IPs Util.</th>
-			        <th>Broadcast</th>
-			    </tr>`;
-	
-	table.appendChild(thead);
-
-	const tbody = document.createElement('tbody');
-
-		resultadosSubredes.forEach((subred, index) => {
-		    
-		    const tr = document.createElement('tr');
-			    tr.innerHTML = `
-			        <td>${index + 1}</td>
-			        <td>${subred.nombre}</td>
-			        <td>${subred.hostsRequeridos}</td>
-			        <td>${subred.hostsUtilizables}</td>
-			        <td>${subred.nuevaMascaraCIDR}</td>
-			        <td>${subred.mascaraDecimal}</td>
-			        <td>${subred.ipRed}</td>
-			        <td>${subred.rangoIPs}</td>
-			        <td>${subred.broadcast}</td>`;
-			    tbody.appendChild(tr);
-		});
-
-	table.appendChild(tbody);
+const tbody = document.createElement('tbody');
+resultadosSubredes.forEach((subred, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${subred.nombre}</td>
+        <td>${subred.hostsRequeridos}</td>
+        <td>${subred.hostsUtilizables}</td>
+        <td>${subred.nuevaMascaraCIDR}</td>
+        <td>${subred.mascaraDecimal}</td>
+        <td>${subred.ipRed}</td>
+        <td>${subred.rangoIPs}</td>
+        <td>${subred.broadcast}</td>`;
+    tbody.appendChild(tr);
+});
+table.appendChild(tbody);
 ContainnerResult.appendChild(table);
+
+			/*----------Calculo de Host--------------*/
+				
+		}
+
+			if(IP==""){
+				let ElementosInputHost = document.querySelectorAll("#inputNumberHost");
+
+
+
+
+			}
+	}
 }
-/*------------------------------------------------------------------*/
+
 
 function imprimirDivDirecto(idDelDiv) {
     const divContenido = document.getElementById(idDelDiv);

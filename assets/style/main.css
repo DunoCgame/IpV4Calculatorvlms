@@ -13,7 +13,7 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     height: 100vh;
-    background: orange;
+    background: #08041b;
 }
 
 
@@ -22,14 +22,12 @@
 .div3 { grid-area: 2 / 1 / 5 / 2; }
 .div4 { grid-area: 3 / 2 / 5 / 5; }
 
-
-.div1 {
-    background: #504b4b;
-}
+/*
+.div1 {background: #504b4b; }
 .div2{background: #504b4b;}
 .div3{background: #504b4b;}
 .div4{background:#504b4b;}
-
+*/
 
 .div1 {
     display: flex;
@@ -43,7 +41,7 @@
 }
 
 #Add_ip {
-    background: #504b4b;
+    background: #08041b;
     color: white;
     font-weight: bold;
     border-style: none;
@@ -54,7 +52,7 @@
 
 
 #Prefijo_original {
-    background: #504b4b;
+    background: #08041b;
     color: white;
     font-weight: bold;
     border-style: none;
@@ -68,7 +66,8 @@
     width: 83px;
     height: 40px;
     font-weight: bold;
-    background: #20baff;
+    background: hwb(208deg 0% 0%);
+    border: 0.2px solid #0da5a5;
     color: white;
     border-radius: 10px;
     margin-right: 3px;
@@ -78,15 +77,16 @@
     width: 83px;
     height: 40px;
     font-weight: bold;
-    background: #77a542;
+    background: #6da72a;
     color: white;
+    border: 0.5px solid #998a41;
     border-radius: 10px;
     margin-right: 3px;
 }
 
 .form {
     width: 48%;
-    background: #504b4b;
+    background: #504b4b00;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -219,6 +219,12 @@
 .labelHora {
     margin-right: 17px;
 }
+
+.Error-message{
+    color: red;
+    font-size: 21px;
+}
+
 #results {
     margin-top: -1px;
     padding: 2px;
