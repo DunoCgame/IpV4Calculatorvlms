@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name = "viewport" content = "width=device-width">
+	<meta name="Web description" content="Descripción de la página">
+	<link rel="stylesheet" href="assets/style/main.css">
+	<link rel="icon" href="assets/image/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="body">
+<div class="conntainner1">
+<div class="div1"> 
+
+<h1 class="title-app">IPV4-vlsm</h1>
+<div class="form">
+	<input type="text" placeholder="IP 0.0.0.0" value="192.168.1.0" id="Add_ip">
+	<label id="Add_iplabel" style="font-size:24px; font-weight: bold;">/</label>
+	<input type="number" placeholder="Prefijo Eje: /24" value="24" min="1" max="31" id="Prefijo_original">
+</div>
+<div>
+	<button class="btn-ip" id="calcular" onclick="CalculateRedIpv4()">Calcular</button>
+	<button class="btn-print" id="calcular" onclick="imprimirDivDirecto('results')">Imprimir</button>
+</div>
+</div>
+<div class="div2"> 
+	<ul class="item-ipv4-list">
+	  <!-- Redes privadas -->
+	  <span class="item-ipv4-list-title">Privada</span>
+	  <span class="privada">10.0.0.0 – 10.255.255.255(Clase A) /8</span>
+	  <span class="privada">172.16.0.0 – 172.31.255.255 (Clase B) /16</span>
+	  <span class="privada">192.168.0.0 – 192.168.255.255 (Clase C) /24</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <!-- Redes públicas comunes -->
+	  <span class="item-ipv4-list-title">Publica</span>
+	  <span class="publica">1.0.0.0 – 1.255.255.255 /8</span>
+	  <span class="publica">8.8.8.0 – 8.8.8.255 (Google DNS) /24</span>
+	  <span class="publica">200.0.0.0 – 201.255.255.255(LATAM) /7</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <!-- Otras clases -->
+	  <span class="item-ipv4-list-title">Especial Multicast</span>
+	  <span class="especial">224.0.0.0 – 239.255.255.255 (Clase D)</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <span class="item-ipv4-list-title">Reservada para uso futuro</span>
+	  <span class="reservada">240.0.0.0 – 255.255.255.254 (Clase E)</span>
+	</ul>
+
+</div>
+<div class="div3">
+	<label id="Add_iplabel" style="font-size:20px; font-weight: bold;">Departamentos</label>
+
+	<section class="containner-number-idicador">
+			<button class="Btn-min" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); Min()">-</button>
+				<span class="number-indicador" id="value_cant">0</span>
+				<input type="number" id="number_Host" min="0" placeholder="0" style="font-size:14px; font-weight: bold; width:95%; display: none;" onchange="GeneratorContainnerHost(this)">
+			<button class="Btn-max" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); Max()">+</button>
+	</section>
+
+	<div id="containner_number_host" class="containner-number-host">
+	
+	</div>
+</div>
+<div class="div4">
+
+	<div class="containnerDataResult" id="results">
+
+		
+	</div>
+</div>
+</div>
+</body>
+<script type="text/javascript" src="assets/js/main.js"></script>
+</html>

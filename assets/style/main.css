@@ -1,0 +1,303 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.body{
+   background: #504b4b;
+   color:white;
+}
+.conntainner1 {
+    display: grid;
+    grid-template-columns: 145px repeat(3, 1fr);
+    grid-template-rows: 45px 60px repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: 100vh;
+    background: orange;
+}
+
+
+.div1 { grid-area: 1 / 1 / 2 / 5; }
+.div2 { grid-area: 2 / 2 / 3 / 5; }
+.div3 { grid-area: 2 / 1 / 5 / 2; }
+.div4 { grid-area: 3 / 2 / 5 / 5; }
+
+
+.div1 {
+    background: #504b4b;
+}
+.div2{background: #504b4b;}
+.div3{background: #504b4b;}
+.div4{background:#504b4b;}
+
+
+.div1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-app {
+    color: white;
+    margin-left: 10.5px;
+}
+
+#Add_ip {
+    background: #504b4b;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    border-bottom: 0.5px solid white;
+    font-size: x-large;
+    width: 31%;
+}
+
+
+#Prefijo_original {
+    background: #504b4b;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    border-bottom: 0.5px solid white;
+    font-size: x-large;
+    width: 9%;
+}
+
+
+.btn-ip {
+    width: 83px;
+    height: 40px;
+    font-weight: bold;
+    background: #20baff;
+    color: white;
+    border-radius: 10px;
+    margin-right: 3px;
+}
+
+.btn-print {
+    width: 83px;
+    height: 40px;
+    font-weight: bold;
+    background: #77a542;
+    color: white;
+    border-radius: 10px;
+    margin-right: 3px;
+}
+
+.form {
+    width: 48%;
+    background: #504b4b;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.containner-number-idicador {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.Btn-min {
+    width: 34px;
+    font-size: 19px;
+    font-weight: bold;
+}
+.Btn-max {
+    width: 34px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.number-indicador {
+    font-size: 22px;
+}
+
+.div2{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.item-ipv4-list {
+    display: flex;
+    width: 100%;
+    font-size: 12px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item-ipv4-list-title{
+  font-weight: bold;
+  font-size: 16px;
+
+}
+
+.privada {
+    color: #1bff00;
+    font-weight: bold;
+}
+.publica {
+  color: blue;
+  font-weight: bold;
+}
+.especial {
+  color: orange;
+  font-weight: bold;
+}
+.reservada {
+    color: #ff85f6;
+    font-weight: bold;
+}
+
+.div3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.item-host {
+    background: #2e2d2d;
+    padding: 2.5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.div4 {
+    background: #9e9e9e;
+    padding: 3.5px;
+}
+
+.input-item-host {
+    width: 97%;
+    margin-bottom: 5px;
+}
+
+.encabesado-resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-Encabesado1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    font-weight: bold;
+}
+
+.sub-Encabesado2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+#continnerData {
+    margin-left: 6px;
+    background: #f1f1f1;
+}
+
+
+/*------------------------------------------*/
+
+.labelfecha{
+ margin-left:17px;
+}
+.labelHora {
+    margin-right: 17px;
+}
+#results {
+    margin-top: -1px;
+    padding: 2px;
+    background-color: #ffffff;
+    border-radius: 0px;
+    border: 1px solid #b3d9ff;
+    /* font-family: 'Consolas', 'Courier New', monospace; */
+    font-size: 0.9em;
+    overflow-x: auto;
+    color: black;
+    height: 76vh;
+}
+#results h2 {
+    color: #007bff;
+    text-align: center;
+    margin-left: 2.5px;
+    margin-right: 10px;
+}
+
+        #results pre {
+            white-space: pre-wrap; /* Permite saltos de línea para el texto de error */
+            word-wrap: break-word;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+
+#results table {
+    width: 98%;
+    border-collapse: collapse;
+    margin-top: 9px;
+    
+}
+
+
+
+
+        #results th, #results td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        #results th {
+            background-color: #e2eaf0;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap; /* Evita que los encabezados se rompan */
+        }
+        #results tr:nth-child(even) {
+            background-color: #f7f9fc;
+        }
+
+
+        /*------------------------------------------------------------------------------------*/
+
+        @media print {
+            /* Oculta los encabezados y pies de página (URL, fecha, título) */
+            @page {
+                size: A4 portrait; /* Puedes ajustar el tamaño y orientación */
+                margin: 0; /* Elimina todos los márgenes */
+            }
+
+            body {
+                margin: 0px; /* Asegura que el cuerpo no tenga márgenes */
+            }
+
+            /* Esto es un truco para "esconder" el contenido que el navegador suele poner */
+            /* En algunos navegadores, reducir el tamaño de la página y el margen puede ayudar */
+            /* En otros, la única forma es configurar la impresión manualmente (ver nota abajo) */
+            html, body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden; /* Evita barras de desplazamiento en la impresión */
+            }
+
+            /* IMPORTANTE: Algunos navegadores ponen esta información en áreas no controlables por CSS.
+               La única forma 100% garantizada de eliminarlas es a través de las opciones de impresión
+               del propio navegador (ej. "Encabezados y pies de página" en Chrome).
+               Este CSS reduce la visibilidad o el espacio que ocupan.
+            */
+        }
