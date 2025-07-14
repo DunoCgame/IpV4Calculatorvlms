@@ -1,0 +1,199 @@
+<div class="div2"> 
+	<ul class="item-ipv4-list">
+	  <!-- Redes privadas -->
+	  <span class="item-ipv4-list-title">Privada</span>
+	  <span class="privada">10.0.0.0 – 10.255.255.255(Clase A) /8</span>
+	  <span class="privada">172.16.0.0 – 172.31.255.255 (Clase B) /16</span>
+	  <span class="privada">192.168.0.0 – 192.168.255.255 (Clase C) /24</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <!-- Redes públicas comunes -->
+	  <span class="item-ipv4-list-title">Publica</span>
+	  <span class="publica">1.0.0.0 – 1.255.255.255 /8</span>
+	  <span class="publica">8.8.8.0 – 8.8.8.255 (Google DNS) /24</span>
+	  <span class="publica">200.0.0.0 – 201.255.255.255(LATAM) /7</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <!-- Otras clases -->
+	  <span class="item-ipv4-list-title">Especial Multicast</span>
+	  <span class="especial">224.0.0.0 – 239.255.255.255 (Clase D)</span>
+	</ul>
+	<ul class="item-ipv4-list">
+	  <span class="item-ipv4-list-title">Reservada para uso futuro</span>
+	  <span class="reservada">240.0.0.0 – 255.255.255.254 (Clase E)</span>
+	</ul>
+</div>
+
+
+	<label id="Add_iplabel" style="font-size:24px; font-weight: bold;">Total Host</label>
+	<input type="number" id="number_Host" min="0" placeholder="0" style="font-size:14px; font-weight: bold; width:10%" >
+	<label id="Add_iplabel" style="font-size:24px; font-weight: bold;">|</label>
+	<input type="text" placeholder="IP 0.0.0.0" id="Add_ip">
+	<label id="Add_iplabel" style="font-size:24px; font-weight: bold;">/</label>
+	<input type="text" placeholder="Mask" maxlength="2">
+	<button class="btn-ip" id="calcular">calcular</button>
+	<button class="btn-ip" id="clasificar">clasificar red</button>
+	<button class="btn-ip" id="clasificar">Determinar Subred</button>
+
+
+
+	<button class="btn-ip" id="clasificar">clasificar red</button>
+	<button class="btn-ip" id="clasificar">Determinar Subred</button>
+
+
+		<div class="item-host">
+			<label><span id="id_Host">1)</span>Host</label>
+			<input type="text" class="NamenumberHost1 input-item-host" id="inputNameNumberHost" placeholder="Nombre">
+			<input type="number" min="0" class="numberHost1 input-item-host"  id="inputNumberHost"  placeholder="Host">
+		</div>		
+		<div class="item-host">
+			<label><span>2)</span>Host</label>
+			<input type="text" class="NamenumberHost1 input-item-host" placeholder="Nombre">
+			<input type="number" min="0" class="numberHost1 input-item-host"  id="inputNumberHost" placeholder="Host">
+		</div>
+		<div class="item-host">
+			<label><span>3)</span>Host</label>
+			<input type="text" class="NamenumberHost1 input-item-host" placeholder="Nombre">
+			<input type="number" min="0" class="numberHost1 input-item-host"  id="inputNumberHost" placeholder="Host">
+		</div>
+
+
+
+	
+Clase A privada: 10.0.0.0/8 (16,777,214 hosts)
+
+Clase B privada: 172.16.0.0/16 a 172.31.0.0/16 (65,534 hosts por segmento /16)
+
+Clase C privada: 192.168.0.0/24 a 192.168.255.0/24 (254 hosts por segmento /24)
+
+la cantidad de dispocitivos disponibles por sub red dpende de la canidad de host
+
+
+Los rangos definidos por el RFC 1918 son:
+
+Clase A: 10.0.0.0 a 10.255.255.255 (prefijo /8)
+
+Clase B: 172.16.0.0 a 172.31.255.255 (prefijo /12)
+
+Clase C: 192.168.0.0 a 192.168.255.255 (prefijo /16)
+
+
+function procesarIP() {
+    const ipInput = document.getElementById('ipAddress');
+    const ipAddress = ipInput.value;
+    const resultadoElement = document.getElementById('resultado');
+
+    // 1. Validar el formato de la IP (opcional pero muy recomendable)
+    const ipPattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+    if (!ipPattern.test(ipAddress)) {
+        resultadoElement.textContent = "Formato de IP inválido. Por favor, introduce una IP válida (ej: 192.168.1.1).";
+        return;
+    }
+
+    // 2. Dividir la IP en octetos
+    const octetosString = ipAddress.split('.'); // Esto devuelve un array de strings (ej: ["192", "168", "1", "1"])
+
+    // 3. Convertir los octetos a números enteros
+    const octetosNumeros = octetosString.map(octeto => parseInt(octeto, 10));
+
+    // Ahora 'octetosNumeros' es un array de números (ej: [192, 168, 1, 1])
+    // ¡Aquí es donde puedes realizar tus cálculos!
+
+    let mensajeCalculo = "Valores de la IP obtenidos:\n";
+    octetosNumeros.forEach((octeto, index) => {
+        mensajeCalculo += `Octeto ${index + 1}: ${octeto}\n`;
+    });
+
+    // Ejemplo de cálculo simple: Sumar todos los octetos
+    const sumaOctetos = octetosNumeros.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+    mensajeCalculo += `\nSuma de los octetos: ${sumaOctetos}`;
+
+    // Ejemplo de cómo acceder a octetos individuales:
+    const primerOcteto = octetosNumeros[0];
+    const ultimoOcteto = octetosNumeros[3];
+    mensajeCalculo += `\nPrimer octeto: ${primerOcteto}`;
+    mensajeCalculo += `\nÚltimo octeto: ${ultimoOcteto}`;
+
+
+    resultadoElement.textContent = mensajeCalculo;
+
+    // Puedes agregar lógica para determinar la clase de la IP, la máscara de subred,
+    // el rango de hosts, etc.
+}
+
+
+
+
+if (ipParts.length !== 4 || ipParts.some(part => isNaN(part) || part < 0 || part > 255)) {
+		
+		console.log("Error: Dirección IP de red principal inválida. Asegúrate de que tenga 4 octetos numéricos (0-255).");
+}else{
+	/*-------optener valore de los host-------------------*/
+	let ElementosInputHost = document.querySelectorAll("#inputNumberHost");
+
+	// Convertir la IP principal de la red base a un número entero
+    let currentIPDecimal = (ipParts[0] << 24) | (ipParts[1] << 16) | (ipParts[2] << 8) | ipParts[3];
+
+    console.log(currentIPDecimal)
+
+		for (var i = 0; i<ContainnerElementosInputHost; i++) {
+
+			console.log(ElementosInputHost[i].value);
+
+		}
+}
+
+
+// Obtener el elemento HTML donde mostraremos los resultados
+const resultadosDiv = document.getElementById('resultados');
+
+// Si el div no existe, salimos o manejamos el error
+if (!resultadosDiv) {
+    console.error("El elemento con ID 'resultados' no se encontró en el HTML.");
+} else {
+    // Recorrer cada objeto en el array
+    miArray.forEach((objeto, index) => {
+        // Crear un div para cada objeto
+        const divObjeto = document.createElement('div');
+        divObjeto.classList.add('objeto-info'); // Para aplicar estilos si quieres
+
+        // Agregar un título para cada objeto
+        const tituloObjeto = document.createElement('h3');
+        tituloObjeto.textContent = `Información de Área ${index + 1}`;
+        divObjeto.appendChild(tituloObjeto);
+
+        // Recorrer las claves y valores de cada objeto
+        for (const clave in objeto) {
+            if (objeto.hasOwnProperty(clave)) {
+                const valor = objeto[clave];
+
+                // Crear un párrafo o una lista para cada par clave-valor
+                const pElement = document.createElement('p');
+                // Usamos `textContent` para mayor seguridad, evita inyección de HTML
+                pElement.textContent = `${clave}: ${valor}`; 
+                divObjeto.appendChild(pElement);
+            }
+        }
+        // Añadir una línea separadora entre objetos (opcional)
+        if (index < miArray.length - 1) {
+            const hr = document.createElement('hr');
+            divObjeto.appendChild(hr);
+        }
+
+        // Añadir el div del objeto al contenedor principal
+        resultadosDiv.appendChild(divObjeto);
+    });
+}
+
+
+            for (const req of Host_requeridos) {
+                if (!req.nombre || req.nombre.trim() === '') {
+                	ContainnerResult.innerHTML= '';
+                  ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: El nombre del requisito de host no puede estar vacío.</p>`;
+                }
+                if (isNaN(req.hosts) || req.hosts < 2) {
+                	ContainnerResult.innerHTML= '';
+                 	ContainnerResult.innerHTML=`<p style="color:red; font-size:20px">Error: La cantidad de hosts para "${req.nombre}" debe ser un número y al menos 2 (para host utilizable).</p>`;
+                }
+            }
