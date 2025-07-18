@@ -4,4 +4,4 @@ Aplicación de calculo de subredes para direcciones ipv4 usando del método VLSM
 
 ### Imagen de la aplicación
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo")
+![alt text](https://github.com/DunoCgame/IpV4Calculatorvlms/blob/main/CalculoIP.png "Logo")
